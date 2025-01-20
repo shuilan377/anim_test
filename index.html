@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Animation</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .text {
+      font-size: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .text.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="text-container">
+    <div class="text">you’re zalupa</div>
+    <div class="text">piska</div>
+    <div class="text">stoyak</div>
+    <div class="text">gandon</div>
+    <div class="text">eblan</div>
+  </div>
+
+  <script>
+    const texts = document.querySelectorAll('.text');
+    texts.forEach((text, index) => {
+      setTimeout(() => {
+        text.classList.add('show');
+      }, index * 1500); // Каждое слово появляется с интервалом 1.5 секунды
+    });
+  </script>
+</body>
+</html>
