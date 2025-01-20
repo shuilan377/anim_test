@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Text Animation</title>
+  <title>Interactive Animation</title>
   <style>
     body {
       margin: 0;
@@ -15,6 +15,7 @@
       background-color: #111;
       color: #fff;
       font-family: Arial, sans-serif;
+      flex-direction: column;
       overflow: hidden;
     }
 
@@ -36,6 +37,54 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    .image {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .image img {
+      width: 300px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .button-clear {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      color: #fff;
+      background-color: #f44336;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-clear:hover {
+      background-color: #d32f2f;
+    }
+
+    .make-zalupa {
+      opacity: 0;
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 1.5rem;
+      color: #fff;
+      background: linear-gradient(45deg, #ff5722, #ff9800);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 5px 15px rgba(255, 152, 0, 0.8);
+      transition: opacity 1s ease;
+    }
+
+    .make-zalupa.show {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -47,12 +96,47 @@
     <div class="text">eblan</div>
   </div>
 
+  <div class="image">
+    <img src="https://basket-15.wbbasket.ru/vol2352/part235282/235282747/images/big/1.webp">
+  </div>
+
+  <audio id="surprise-audio" src="https://www.soundjay.com/button/beep-07.mp3"></audio>
+
+  <button class="button-clear">ахахахахах</button>
+  <button class="make-zalupa" onclick="window.open('https://www.youtube.com/watch?v=xvFZjo5PgG0', '_blank')">make zalupa</button>
+
   <script>
     const texts = document.querySelectorAll('.text');
+    const imageContainer = document.querySelector('.image');
+    const audio = document.getElementById('surprise-audio');
+    const clearButton = document.querySelector('.button-clear');
+    const zalupaButton = document.querySelector('.make-zalupa');
+
+    // Плавное проявление текста
     texts.forEach((text, index) => {
       setTimeout(() => {
         text.classList.add('show');
-      }, index * 1500); // Каждое слово появляется с интервалом 1.5 секунды
+      }, index * 1500); // Интервал 1.5 секунды между словами
+    });
+
+    // Показываем картинку и воспроизводим звук после последнего текста
+    setTimeout(() => {
+      imageContainer.style.display = 'block'; // Показываем картинку
+      audio.play(); // Воспроизводим звук
+      clearButton.style.display = 'inline-block'; // Показываем кнопку "Очистить"
+    }, texts.length * 1500 + 1500);
+
+    // Очистка сайта и появление кнопки "make zalupa"
+    clearButton.addEventListener('click', () => {
+      document.body.innerHTML = ''; // Очищаем содержимое сайта
+      document.body.style.display = 'flex';
+      document.body.style.justifyContent = 'center';
+      document.body.style.alignItems = 'center';
+      document.body.style.flexDirection = 'column';
+
+      // Добавляем кнопку "make zalupa"
+      zalupaButton.classList.add('show');
+      document.body.appendChild(zalupaButton); // Вставляем кнопку заново
     });
   </script>
 </body>
